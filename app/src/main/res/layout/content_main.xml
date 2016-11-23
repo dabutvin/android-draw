@@ -12,4 +12,8 @@
     tools:context="com.dabutvin.draw.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <com.dabutvin.draw.FingerLine
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>
