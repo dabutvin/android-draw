@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     private FingerLine fingerLine;
@@ -44,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_reset){
             fingerLine.reset();
+        }
+
+        if(id == R.id.action_share){
+            try {
+                fingerLine.share();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return super.onOptionsItemSelected(item);

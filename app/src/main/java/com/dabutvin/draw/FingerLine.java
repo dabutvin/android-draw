@@ -3,12 +3,22 @@ package com.dabutvin.draw;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Calendar;
 
 /**
  * Created by Dan on 11/22/2016.
@@ -59,6 +69,8 @@ public class FingerLine extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(mBitMap, 0, 0, mCanvasPaint);
         canvas.drawPath(mDrawPath, mDrawPaint);
+        mCanvas.drawBitmap(mBitMap, 0, 0, mCanvasPaint);
+        mCanvas.drawPath(mDrawPath, mDrawPaint);
     }
 
     @Override
@@ -81,7 +93,33 @@ public class FingerLine extends View {
     }
 
     public void reset() {
+        mCanvas.drawColor(Color.WHITE);
         setup();
         invalidate();
+    }
+
+    public void share() throws IOException {
+
+        String _time = "";
+        Calendar cal = Calendar.getInstance();
+        int millisecond = cal.get(Calendar.MILLISECOND);
+        int second = cal.get(Calendar.SECOND);
+        int minute = cal.get(Calendar.MINUTE);
+        int hourofday = cal.get(Calendar.HOUR_OF_DAY);
+        _time = "image_" + hourofday + "" + minute + "" + second + ""
+                + millisecond + ".png";
+        String file_path = Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + "/drawapp";
+        File dir = new File(file_path);
+        if (!dir.exists())
+            dir.mkdirs();
+        File file = new File(dir, _time);
+        FileOutputStream fOut = new FileOutputStream(file);
+        mBitMap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+        fOut.flush();
+        fOut.close();
+        Toast.makeText(getContext(),
+                "Image has been saved in drawapp folder",
+                Toast.LENGTH_LONG).show();
     }
 }
