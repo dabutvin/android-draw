@@ -13,6 +13,7 @@
     tools:showIn="@layout/activity_main">
 
     <com.dabutvin.draw.FingerLine
+        android:id="@+id/fingerline"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

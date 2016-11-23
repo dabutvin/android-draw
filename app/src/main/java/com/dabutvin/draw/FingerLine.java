@@ -38,7 +38,7 @@ public class FingerLine extends View {
         mDrawPaint = new Paint();
         mDrawPaint.setColor(paintColor);
         mDrawPaint.setAntiAlias(true);
-        mDrawPaint.setStrokeWidth(1);
+        mDrawPaint.setStrokeWidth(10);
         mDrawPaint.setStyle(Paint.Style.STROKE);
         mDrawPaint.setStrokeJoin(Paint.Join.MITER);
         mDrawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -78,5 +78,10 @@ public class FingerLine extends View {
 
         invalidate();
         return true;
+    }
+
+    public void reset() {
+        setup();
+        invalidate();
     }
 }

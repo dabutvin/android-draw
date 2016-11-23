@@ -11,12 +11,16 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FingerLine fingerLine;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fingerLine = (FingerLine)findViewById(R.id.fingerline);
     }
 
     @Override
@@ -36,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.action_reset){
+            fingerLine.reset();
         }
 
         return super.onOptionsItemSelected(item);
